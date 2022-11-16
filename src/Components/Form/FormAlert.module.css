@@ -1,0 +1,27 @@
+.form-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.form-message {
+    margin-bottom: 20px;
+}
+
+.form-button {
+    text-align: right;
+}
