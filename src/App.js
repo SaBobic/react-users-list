@@ -8,10 +8,10 @@ function App() {
         { id: 2, username: 'Sara', age: 19 },
     ];
 
-    const [users, setUsers] = useState(DUMMY_USERS);
+    const [usersArray, setUsersArray] = useState(DUMMY_USERS);
 
     const onAddUser = (username, age) => {
-        setUsers(prevUsers => {
+        setUsersArray(prevUsers => {
             const newUser = { id: Math.random(), username: username.trim(), age: age.trim() };
             return [newUser, ...prevUsers];
         });
@@ -20,7 +20,7 @@ function App() {
     return (
         <div>
             <Form onSubmit={onAddUser} />
-            <UsersList users={users} />
+            <UsersList users={usersArray} />
         </div>
     );
 }
