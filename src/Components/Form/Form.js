@@ -1,6 +1,7 @@
 import styles from './Form.module.css';
 import Button from '../UI/Button';
 import FormAlert from './FormAlert';
+import Card from '../UI/Card';
 import { useState } from 'react';
 
 const Form = props => {
@@ -19,15 +20,15 @@ const Form = props => {
 
     const formHandler = e => {
         e.preventDefault();
-        if (!usernameInput || !ageInput) {
+        if (!usernameInput.trim() || !ageInput.trim()) {
             setIsValid(false);
             setAlertMessage('Please enter a valid name and age (non-empty values).');
             return;
         }
-        if (ageInput <= 0) {
+        if (parseInt(ageInput) < 1) {
             setIsValid(false);
             setAlertMessage('Please enter a valid age (>0).');
-            return alertMessage;
+            return;
         }
         props.onSubmit(usernameInput, ageInput);
         setUsernameInput('');
@@ -39,21 +40,17 @@ const Form = props => {
     };
 
     return (
-        <>
+        <Card className={styles.input}>
             <form onSubmit={formHandler}>
-                <label value className={styles['form-field']} htmlFor="username">
-                    Username
-                </label>
-                <input className={styles['form-field']} value={usernameInput} id="username" type="text" onChange={usernameHandler} />
-                <label className={styles['form-field']} htmlFor="age">
-                    Age (Years)
-                </label>
-                <input className={styles['form-field']} value={ageInput} id="age" type="text" onChange={ageHandler} />
+                <label htmlFor="username">Username</label>
+                <input value={usernameInput} id="username" type="text" onChange={usernameHandler} />
+                <label htmlFor="age">Age (Years)</label>
+                <input value={ageInput} id="age" type="number" onChange={ageHandler} />
                 <Button type="submit">Add User</Button>
             </form>
 
             {!isValid && <FormAlert onClose={onCloseAlert}>{alertMessage}</FormAlert>}
-        </>
+        </Card>
     );
 };
 

@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import styles from './App.module.css';
 import Form from './Components/Form/Form';
-import UserItem from './Components/List/UserItem';
-import Card from './Components/UI/Card';
+import UsersList from './Components/List/UsersList';
 
 function App() {
     const DUMMY_USERS = [
@@ -20,15 +18,9 @@ function App() {
     };
 
     return (
-        <div className={styles.container}>
-            <Card>
-                <Form onSubmit={onAddUser} />
-            </Card>
-            <Card>
-                {users.map(user => {
-                    return <UserItem key={user.id} username={user.username} age={user.age} />;
-                })}
-            </Card>
+        <div>
+            <Form onSubmit={onAddUser} />
+            <UsersList users={users} />
         </div>
     );
 }
