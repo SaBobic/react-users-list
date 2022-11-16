@@ -7,9 +7,7 @@ import { useState } from 'react';
 const Form = props => {
     const [usernameInput, setUsernameInput] = useState('');
     const [ageInput, setAgeInput] = useState('');
-    const [isValid, setIsValid] = useState(true);
-    const [alertMessage, setAlertMessage] = useState('');
-    const [alertTitle, setAlertTitle] = useState('');
+    const [error, setError] = useState();
 
     const usernameHandler = e => {
         setUsernameInput(e.target.value);
@@ -22,15 +20,17 @@ const Form = props => {
     const formHandler = e => {
         e.preventDefault();
         if (!usernameInput.trim() || !ageInput.trim()) {
-            setIsValid(false);
-            setAlertMessage('Please enter a valid name and age (non-empty values).');
-            setAlertTitle('Missing inputs');
+            setError({
+                title: 'Missing inputs',
+                message: 'Please enter a valid name and age (non-empty values).',
+            });
             return;
         }
         if (parseInt(ageInput) < 1) {
-            setIsValid(false);
-            setAlertMessage('Please enter a valid age (>0).');
-            setAlertTitle('Invalid age input');
+            setError({
+                title: 'Invalid age input',
+                message: 'Please enter a valid age (>0).',
+            });
             return;
         }
         props.onSubmit(usernameInput, ageInput);
@@ -39,12 +39,12 @@ const Form = props => {
     };
 
     const onCloseAlert = () => {
-        setIsValid(true);
+        setError();
     };
 
     return (
         <>
-            {!isValid && <FormAlert onClose={onCloseAlert} title={alertTitle} message={alertMessage} />}
+            {error && <FormAlert onClose={onCloseAlert} title={error.title} message={error.message} />}
             <Card className={styles.input}>
                 <form onSubmit={formHandler}>
                     <label htmlFor="username">Username</label>
