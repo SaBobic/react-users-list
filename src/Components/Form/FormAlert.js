@@ -8,17 +8,20 @@ const FormAlert = props => {
     };
 
     return (
-        <div onClick={closeHandler} className={styles['form-overlay']}>
-            <Card>
-                <h2>Invalid input</h2>
-                <div className={styles['form-content']}>
-                    <div className={styles['form-message']}>{props.children}</div>
-                    <div className={styles['form-button']}>
-                        <Button onClick={closeHandler}>Okay</Button>
-                    </div>
+        <>
+            <div onClick={closeHandler} className={styles.backdrop}></div>
+            <Card className={styles.modal}>
+                <header className={styles.header}>
+                    <h2>{props.title}</h2>
+                </header>
+                <div className={styles.content}>
+                    <p>{props.message}</p>
                 </div>
+                <footer className={styles.actions}>
+                    <Button onClick={closeHandler}>Okay</Button>
+                </footer>
             </Card>
-        </div>
+        </>
     );
 };
 

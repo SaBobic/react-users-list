@@ -1,27 +1,45 @@
-.form-overlay {
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
+.backdrop {
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-header {
     width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.75);
 }
 
-h2 {
-    margin-top: 0;
+.modal {
+    position: fixed;
+    top: 30vh;
+    left: 10%;
+    width: 80%;
+    z-index: 100;
+    overflow: hidden;
 }
 
-.form-message {
-    margin-bottom: 20px;
+.header {
+    background: #4f005f;
+    padding: 1rem;
 }
 
-.form-button {
-    text-align: right;
+.header h2 {
+    margin: 0;
+    color: white;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.actions {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+    .modal {
+        left: calc(50% - 20rem);
+        width: 40rem;
+    }
 }

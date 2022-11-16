@@ -9,6 +9,7 @@ const Form = props => {
     const [ageInput, setAgeInput] = useState('');
     const [isValid, setIsValid] = useState(true);
     const [alertMessage, setAlertMessage] = useState('');
+    const [alertTitle, setAlertTitle] = useState('');
 
     const usernameHandler = e => {
         setUsernameInput(e.target.value);
@@ -23,11 +24,13 @@ const Form = props => {
         if (!usernameInput.trim() || !ageInput.trim()) {
             setIsValid(false);
             setAlertMessage('Please enter a valid name and age (non-empty values).');
+            setAlertTitle('Missing inputs');
             return;
         }
         if (parseInt(ageInput) < 1) {
             setIsValid(false);
             setAlertMessage('Please enter a valid age (>0).');
+            setAlertTitle('Invalid age input');
             return;
         }
         props.onSubmit(usernameInput, ageInput);
@@ -40,17 +43,18 @@ const Form = props => {
     };
 
     return (
-        <Card className={styles.input}>
-            <form onSubmit={formHandler}>
-                <label htmlFor="username">Username</label>
-                <input value={usernameInput} id="username" type="text" onChange={usernameHandler} />
-                <label htmlFor="age">Age (Years)</label>
-                <input value={ageInput} id="age" type="number" onChange={ageHandler} />
-                <Button type="submit">Add User</Button>
-            </form>
-
-            {!isValid && <FormAlert onClose={onCloseAlert}>{alertMessage}</FormAlert>}
-        </Card>
+        <>
+            {!isValid && <FormAlert onClose={onCloseAlert} title={alertTitle} message={alertMessage} />}
+            <Card className={styles.input}>
+                <form onSubmit={formHandler}>
+                    <label htmlFor="username">Username</label>
+                    <input value={usernameInput} id="username" type="text" onChange={usernameHandler} />
+                    <label htmlFor="age">Age (Years)</label>
+                    <input value={ageInput} id="age" type="number" onChange={ageHandler} />
+                    <Button type="submit">Add User</Button>
+                </form>
+            </Card>
+        </>
     );
 };
 
