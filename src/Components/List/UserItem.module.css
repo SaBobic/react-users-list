@@ -1,0 +1,10 @@
+.user-item {
+    font-size: 20px;
+    padding: 7px;
+    border: 1px solid #000;
+    margin-bottom: 10px;
+}
+
+.user-item:last-of-type {
+    margin-bottom: 0;
+}
