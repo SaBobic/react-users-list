@@ -10,7 +10,7 @@ function App() {
 
     const [usersArray, setUsersArray] = useState(DUMMY_USERS);
 
-    const onAddUser = (username, age) => {
+    const addUserHandler = (username, age) => {
         setUsersArray(prevUsers => {
             const newUser = { id: Math.random(), username: username.trim(), age: age.trim() };
             return [newUser, ...prevUsers];
@@ -19,7 +19,7 @@ function App() {
 
     return (
         <div>
-            <Form onSubmit={onAddUser} />
+            <Form onSubmit={addUserHandler} />
             <UsersList users={usersArray} />
         </div>
     );
