@@ -18,10 +18,10 @@ function App() {
     };
 
     return (
-        <div>
+        <>
             <Form onSubmit={addUserHandler} />
             <UsersList users={usersArray} />
-        </div>
+        </>
     );
 }
 
